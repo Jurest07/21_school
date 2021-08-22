@@ -1,0 +1,21 @@
+#!/bin/bash
+for dir in ex*
+do
+	echo $dir
+	cd $dir
+	echo -n 'Norminette: '
+	norminette ft*
+	make 1>/dev/null
+	if [[ "$?" -eq 0 ]]
+	then
+		echo "Compiling success"
+		./main
+	else
+		echo "Compiling failed"
+	fi
+	cat ft*
+	cd ..
+
+	echo
+	echo
+done

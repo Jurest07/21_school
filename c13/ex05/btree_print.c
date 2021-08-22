@@ -1,0 +1,74 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "ft_btree.h"
+
+
+
+
+
+char const *updown      = "│";
+char const *leftright   = "─";
+char const *upright     = "└";
+char const *uprightdown = "├";
+
+char const *tabothadd_left  = "├─ ";
+char const *tabmeadd_left   = "│  ";
+char const *tabothadd_right = "└─ ";
+char const *tabmeadd_right  = "   ";
+
+char *create_str(char const *one, char const *two)
+{
+	char *s = malloc(sizeof(char) * (strlen(one) + strlen(two) + 1));
+	char *p = s;
+
+	while (*one)
+		*p++ = *one++;
+	while (*two)
+		*p++ = *two++;
+	*p = '\0';
+	return s;
+}
+
+void _nvx_btreei_print(t_btree *tree, char *tabme, char *taboth)
+{
+	printf("%s%i\n", tabme, *(int *)tree->item);
+	char *one;
+	char *two;
+	t_btree *chs[] = { tree->left, tree->right };
+	
+	for (int i = 0; i < 2; ++i)
+	{
+		if (!chs[i])
+			continue;
+
+		if (i == 0 && chs[1])
+		{
+			one = create_str(taboth, tabothadd_left);
+			two = create_str(taboth, tabmeadd_left);
+			_nvx_btreei_print(chs[i], one, two);
+			free(one);
+			free(two);
+		}
+		else
+		{
+			one = create_str(taboth, tabothadd_right);
+			two = create_str(taboth, tabmeadd_right);
+			_nvx_btreei_print(chs[i], one, two);
+			free(one);
+			free(two);
+		}
+	}
+}
+
+void nvx_btreei_print(t_btree *tree)
+{
+	_nvx_btreei_print(tree, "", "");
+}
+
+
+
+
+
+// END

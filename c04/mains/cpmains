@@ -1,0 +1,3 @@
+#!/bin/bash
+find . -path "./mains/ex*/main.c" -or -path "./mains/ex*/makefile" \
+	| sed -e "p;s/mains\///g" | xargs -n2 cp

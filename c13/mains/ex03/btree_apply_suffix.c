@@ -1,0 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   btree_apply_suffix.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akodos <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/17 23:40:34 by akodos            #+#    #+#             */
+/*   Updated: 2021/08/20 00:47:02 by lis              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stddef.h>
+
+#include "ft_btree.h"
+
+void	btree_apply_suffix(t_btree *root, void (*fun)(void *))
+{
+	if (!root)
+		return ;
+	btree_apply_suffix(root->left, fun);
+	btree_apply_suffix(root->right, fun);
+	fun(root->item);
+}

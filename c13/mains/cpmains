@@ -1,0 +1,15 @@
+#!/bin/bash
+for dir in ex*
+do
+	for file in `ls mains/$dir`
+	do
+		if [ -f $dir/$file ]
+		then
+			echo "pass $file"
+		else
+			echo "cp -r mains/$dir/$file $dir/$file"
+			cp -r mains/$dir/$file $dir/$file
+		fi
+	done
+	echo
+done
